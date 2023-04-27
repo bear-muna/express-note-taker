@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 
 router.get('/', (req, res) => {
-    fs.readFile('../db/db.json', 'utf-8', (err) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
             res.status(500).json({ msg: "Error reading db" });
         } else {
@@ -14,17 +14,17 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    fs.read('../db/db.json', 'utf-8', (err) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
             res.status(500).json({ msg: "Error reading db" });
         } else {
             const dataArr = JSON.parse(data);
             const newNote = {
                 title: req.body.title,
-                test: req.body.text,
+                text: req.body.text,
             };
             dataArr.push(newNote);
-            fs.writeFile('../db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
+            fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
                 if (err) {
                     res.status(500).json({ msg: "Error writing db" });
                 } else {
@@ -34,3 +34,5 @@ router.post('/', (req, res) => {
         }
     })
 })
+
+module.exports = router;
