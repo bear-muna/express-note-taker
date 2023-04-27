@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const uuid = require('uuid');
 
 router.get('/', (req, res) => {
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
@@ -22,6 +23,7 @@ router.post('/', (req, res) => {
             const newNote = {
                 title: req.body.title,
                 text: req.body.text,
+                id: uuid(),
             };
             dataArr.push(newNote);
             fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
@@ -36,5 +38,6 @@ router.post('/', (req, res) => {
 })
 
 // TODO: Create a delete note function
+
 
 module.exports = router;
