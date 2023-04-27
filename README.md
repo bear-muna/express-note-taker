@@ -1,2 +1,13 @@
-# express-note-taker
-Note taking application with local server database
+# Express Note Taker
+
+## Description
+
+## Installation
+
+## Usage
+
+## Screenshots
+
+## Example Video
+
+## Links
