@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
             const newNote = {
                 title: req.body.title,
                 text: req.body.text,
-                id: uuid(),
+                id: uuid.v4(),
             };
             dataArr.push(newNote);
             fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
@@ -37,7 +37,37 @@ router.post('/', (req, res) => {
     })
 })
 
-// TODO: Create a delete note function
-
+// // TODO: Create a delete note function
+// router.delete('/:id', (req, res) => {
+//     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+//         if (err) {
+//             res.status(500).json({ msg: "Error reading db" });
+//         } else {
+//             const dataArr = JSON.parse(data);
+//             const noteSelect = req.params.id;
+//             console.log(noteSelect);
+//             for (let i = 0; i < dataArr.length; i++) {
+//                 if (dataArr[i].id) {
+//                     console.log(dataArr[i].id);
+//                 }
+//             }
+//             for (let i = 0; i < dataArr.length; i++) {
+//                 if (dataArr[i].id === noteSelect) {
+//                     console.log("Working");
+//                     // dataArr.splice(i, 1);
+//                     // fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
+//                     //     if (err) {
+//                     //         res.status(500).json({ msg: "Error writing db" });
+//                     //     } else {
+//                     //         return;
+//                     //     }
+//                     // })
+//                 } else {
+//                     res.status(404).json({ msg: "Cannot find note with id" })
+//                 }
+//             }
+//         }
+//     })
+// })
 
 module.exports = router;
