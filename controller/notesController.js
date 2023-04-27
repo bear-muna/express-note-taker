@@ -35,4 +35,6 @@ router.post('/', (req, res) => {
     })
 })
 
+// TODO: Create a delete note function
+
 module.exports = router;

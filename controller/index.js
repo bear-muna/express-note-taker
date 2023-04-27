@@ -7,6 +7,6 @@ router.get('/', (req, res) => {
 });
 
 const notesRoutes = require('./notesController');
-router.use('/notes', notesRoutes);
+router.use('/api/notes', notesRoutes);
 
 module.exports = router;
