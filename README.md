@@ -15,3 +15,5 @@ With the landing page, click the button to enter the notes section. Input your n
 
 ## Links
 Github Repo: https://github.com/bear-muna/express-note-taker
+
+Heroku Deployed Site: https://bear-express-note-taker.herokuapp.com/
