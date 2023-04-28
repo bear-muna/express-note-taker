@@ -3,7 +3,6 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-let notes;
 
 if (window.location.pathname === '/notes.html') {
   noteTitle = document.querySelector('.note-title');
@@ -125,7 +124,7 @@ const handleRenderSaveBtn = () => {
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   console.log(jsonNotes);
-  if (window.location.pathname === '/notes') {
+  if (window.location.pathname === '/notes.html') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
@@ -165,10 +164,8 @@ const renderNoteList = async (notes) => {
   }
 
   jsonNotes.forEach((note) => {
-    console.log(note.title);
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-    console.log(li);
     noteListItems.push(li);
   });
 
