@@ -37,7 +37,6 @@ router.post('/', (req, res) => {
     })
 })
 
-// TODO: Create a delete note function
 router.delete('/:id', (req, res) => {
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
         if (err) {
