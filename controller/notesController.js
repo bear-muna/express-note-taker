@@ -19,14 +19,14 @@ router.post('/', (req, res) => {
         if (err) {
             res.status(500).json({ msg: "Error reading db" });
         } else {
-            const dataArr = JSON.parse(data);
+            const postArr = JSON.parse(data);
             const newNote = {
                 title: req.body.title,
                 text: req.body.text,
                 id: uuid.v4(),
             };
-            dataArr.push(newNote);
-            fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
+            postArr.push(newNote);
+            fs.writeFile('./db/db.json', JSON.stringify(postArr, null, 4), (err) => {
                 if (err) {
                     res.status(500).json({ msg: "Error writing db" });
                 } else {
@@ -37,37 +37,32 @@ router.post('/', (req, res) => {
     })
 })
 
-// // TODO: Create a delete note function
-// router.delete('/:id', (req, res) => {
-//     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-//         if (err) {
-//             res.status(500).json({ msg: "Error reading db" });
-//         } else {
-//             const dataArr = JSON.parse(data);
-//             const noteSelect = req.params.id;
-//             console.log(noteSelect);
-//             for (let i = 0; i < dataArr.length; i++) {
-//                 if (dataArr[i].id) {
-//                     console.log(dataArr[i].id);
-//                 }
-//             }
-//             for (let i = 0; i < dataArr.length; i++) {
-//                 if (dataArr[i].id === noteSelect) {
-//                     console.log("Working");
-//                     // dataArr.splice(i, 1);
-//                     // fs.writeFile('./db/db.json', JSON.stringify(dataArr, null, 4), (err) => {
-//                     //     if (err) {
-//                     //         res.status(500).json({ msg: "Error writing db" });
-//                     //     } else {
-//                     //         return;
-//                     //     }
-//                     // })
-//                 } else {
-//                     res.status(404).json({ msg: "Cannot find note with id" })
-//                 }
-//             }
-//         }
-//     })
-// })
+// TODO: Create a delete note function
+router.delete('/:id', (req, res) => {
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.status(500).json({ msg: "Error reading db" });
+        } else {
+            const deleteArr = JSON.parse(data);
+            const noteSelect = req.params.id;
+            console.log(`This is the note select: ${noteSelect}`);
+            for (let i = 0; i < deleteArr.length; i++) {
+                if (deleteArr[i].id == noteSelect) {
+                    console.log("Working");
+                    deleteArr.splice(i, 1);
+                    fs.writeFile('./db/db.json', JSON.stringify(deleteArr, null, 4), (err) => {
+                        if (err) {
+                            res.status(500).json({ msg: "Error writing db" });
+                        } else {
+                            return res.json(deleteArr);
+                        }
+                    })
+                } else {
+                    res.status(404).json({ msg: "Cannot find note with id" })
+                }
+            }
+        }
+    })
+})
 
 module.exports = router;
